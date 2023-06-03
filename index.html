@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>乃木フラ 平均経験値</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="乃木フラ 平均経験値確認用">
+    <meta name="twitter:description" content="乃木フラ 平均経験値確認ツール">
+    <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/card.png">
+  </head>
+  <body>
+    <h1>乃木フラ 平均経験値</h1>
+    <div class="container">
+      <div class="item">
+        <p class="Subject">１．曜日(イベント)を選択</p>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" id="radio1" name="radioButton" value="0">
+              <label for="radio1">水曜・日曜(等倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio2" name="radioButton" value="1">
+              <label for="radio2">月曜・木曜・金曜(1.5倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio3" name="radioButton" value="2">
+              <label for="radio3">火曜・土曜(2.5倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio4" name="radioButton" value="3">
+              <label for="radio4">4倍イベント</label>
+            </div>
+          </div>
+       <p class="Subject">２．倍率チェックリスト</p>
+          <div class="checkbox-area">
+            <div class="checkbox-group">
+              <input type="checkbox" id="checkBox1">
+              <label for="checkBox1">マンスリーパス効果(+15%)</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="checkBox2">
+              <label for="checkBox2">[ごめんねFingers crossed]梅澤美波<br>[まあいいか？]秋元真夏 どちらかを所持(+30%)</label>
+            </div>
+              <input type="text" id="multiplierInput" inputmode="decimal">
+              <label for="multiplierInput">％：メンバーノギメモ効果</label>
+          </div>
+        <p class="Subject">３．表示したいステージの数字を入力</p>
+          <div class="Stage-area">
+            <input type="text" id="startInput" inputmode="decimal">
+            <label for="startInput">から</label>
+            <input type="text" id="endInput" inputmode="decimal">
+            <label for="endInput">まで</label>
+            <button class="button-style" onclick="updateTable()">表示</button>
+          </div>
+      </div>
+      <div class="item2">
+        <table id="table"></table>
+      </div>
+     </div>
+    
+    <div class="footer">
+        <div class="twitter">誤記・不具合等の連絡は
+          <a href="https://twitter.com/shida_23_" target="_blank">こちら
+          <i class="fa-brands fa-twitter"></i>
+          </a>へ
+          <p class="attention">※数字は半角で入力してください</p>
+        </div>
+    </div>
+  <script src="script.js"></script>
+  </body>
+</html>

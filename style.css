@@ -1,0 +1,281 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  background-color: #812990;
+  color :#FFF;
+}
+
+.Subject {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Subject:after {
+  content: "";
+  display: block;
+  background: linear-gradient(to right, rgb(129, 41, 144), transparent);
+}
+
+.radio-group{
+  margin-left: 20px;
+}
+
+.radio-item {
+  display: block;
+  margin: 10px;
+}
+
+.checkbox-area {
+  margin-left: 32px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-group label {
+  margin-left: 5px; 
+}
+
+.Stage-area{
+  margin-left: 32px;
+}
+
+button {
+  margin: 0 auto;
+  max-width: 240px;
+  padding: 10px 30px;
+  color: #FFF;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  background: #812990;
+  border-radius: 40px;
+}
+
+button:hover {
+  background: #BB79E5;
+}
+
+a {
+  text-decoration: none;
+  color: #1da1f2;
+}
+
+.footer {
+  margin-top: 10px;
+}
+
+.twitter {
+  margin-left: 5px;
+}
+
+.attention{
+  color: red;
+  margin: 0;
+}
+
+
+
+/* 画面幅<600 */
+@media (max-width: 599px) {
+  h1 {
+    font-size: 20px;
+    padding-bottom: 5px;
+  }
+
+  .Subject {
+    font-size: 16px;
+    width: 280px;
+  }
+
+  .Subject:after {
+    height: 5px;
+  }
+
+  input[type="radio"] {
+    height: 14px; 
+    width: 14px;
+  }
+
+  .radio-item {
+    font-size: 14px;
+  }
+
+  input[type="checkbox"] {
+    height: 12px; 
+    width: 12px;
+  }
+
+  .checkbox-area {
+    font-size: 11px;
+  }
+
+  input[type="text"] {
+    font-size: 16px;
+    width: 40px;
+    height: 18px;
+    touch-action: manipulation;
+  }
+
+  .Stage-area{
+    font-size: 14px;
+  }
+
+  #table {
+    font-size: 16px;
+    margin-left: 32px;
+  }
+
+  .twitter{
+    font-size: 12px;
+  }
+
+  .attention {
+    font-size: 10px;
+  }
+
+}
+
+
+
+/* 画面幅600~959 */
+@media (min-width: 600px) and (max-width: 959px) {
+  h1 {
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
+
+  .Subject {
+    font-size: 26px;
+    width: 500px;
+  }
+
+  .Subject:after {
+    height: 5px;
+  }
+
+  input[type="radio"] {
+    height: 14px; 
+    width: 14px;
+  }
+
+  .radio-item {
+    font-size: 18px;
+  }
+
+  input[type="checkbox"] {
+    height: 16px; 
+    width: 16px;
+  }
+
+  .checkbox-area {
+    font-size: 18px;
+  }
+
+  input[type="text"] {
+    font-size: 14px;
+    width: 60px;
+    height: 24px;
+    touch-action: manipulation;
+  }
+
+  .Stage-area{
+    font-size: 18px;
+  }
+
+  #table {
+    font-size: 18px;
+    margin-left: 32px;
+  }
+
+  .twitter{
+    font-size: 16px;
+  }
+
+  .attention {
+    font-size: 12px;
+  }
+  
+}
+
+
+
+/* 画面幅960~ */
+@media (min-width: 960px) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .item{
+    margin-right:auto;
+  }
+
+  h1 {
+    font-size: 32px;
+    padding-bottom: 10px;
+  }
+
+  .Subject {
+    font-size: 26px;
+    width: 530px;
+  }
+
+  .Subject:after {
+    height: 5px;
+  }
+
+  input[type="radio"] {
+    height: 12px; 
+    width: 12px;
+  }
+
+  .radio-item {
+    font-size: 14px;
+  }
+
+  input[type="checkbox"] {
+    height: 12px; 
+    width: 12px;
+  }
+
+  .checkbox-area {
+    font-size: 14px;
+  }
+
+  input[type="text"] { 
+    font-size: 12px;
+    width: 50px;
+    height: 18px;
+  }
+
+  .Stage-area{
+    font-size: 14px;
+  }
+
+  #table {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+
+  .item2{
+    justify-content:center;
+    margin-right:auto;
+  }
+
+  .attention {
+    font-size: 14px;
+  }
+
+}

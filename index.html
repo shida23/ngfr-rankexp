@@ -1,95 +1,65 @@
 <!DOCTYPE html>
-<html lang="jp">
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/6.2.2/handsontable.full.css">
-  <style>
-   * {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      font-size: 100%;
-      font-family: inherit;
-      vertical-align: baseline;
-      box-sizing: border-box;
-    }
-
-    #grid .handsontable .htDimmed {
-      background-color: #fff;
-      color: #000;
-    }
-    
-  </style>
-</head>
-<body onload="createGrid()">
-
-  <input type="text" id="start" inputmode="decimal">
-  <label for="startInput">から</label>
-  <input type="text" id="end" inputmode="decimal">
-  <label for="endInput">まで</label>
-
-  <button class="result" onclick="toggleData()">表示</button>
-
-  <div class="checkbox-group">
-    <input type="checkbox" id="non120">
-    <label for="non120">120秒でない場合も表示(150以降のみ対応)</label>
-  </div>
-
-  <!-- handsontable -->
-  <div id="grid"></div>
-  <script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.min.js"></script>
-  <script>
-    var checkbox = document.getElementById('non120');
-    var csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
-    var hot;
-
-    function createGrid() {
-      loadData();
-    }
-
-    function toggleData() {
-      csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
-      loadData();
-    }
-
-    function loadData() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          var csvData = xhr.responseText;
-          var data = parseCSV(csvData);
-
-          if (hot) {
-            hot.loadData(data);
-          } else {
-            hot = new Handsontable(document.getElementById('grid'), {
-              data: data,
-              colHeaders: false,
-              rowHeaders: false,
-              manualColumnResize: true,
-              fillHandle: false,
-              fixedColumnsLeft: 1,
-              fixedRowsTop: 1,
-              readOnly: true
-            });
-          }
-        }
-      };
-      xhr.open('GET', csvFile, true);
-      xhr.send();
-    }
-
-    function parseCSV(csvData) {
-      var lines = csvData.split('\n');
-      var data = [];
-      for (var i = 0; i < lines.length; i++) {
-        var line = lines[i].trim();
-        if (line !== '') {
-          var values = line.split(',');
-          data.push(values);
-        }
-      }
-      return data;
-    }
-  </script>
-</body>
-</html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>乃木フラ 平均経験値</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="乃木フラ 平均経験値確認用">
+    <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/card.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPQQ5SW3QG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NPQQ5SW3QG');
+    </script>
+  </head>
+  <body>
+    <h1>乃木フラ 平均経験値</h1>
+    <div class="container">
+      <div class="item">
+        <p class="Subject">１．曜日(イベント)を選択</p>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" id="radio1" name="radioButton" value="0">
+              <label for="radio1">水曜・日曜(等倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio2" name="radioButton" value="1">
+              <label for="radio2">月曜・木曜・金曜(1.5倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio3" name="radioButton" value="2">
+              <label for="radio3">火曜・土曜(2.5倍)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" id="radio4" name="radioButton" value="3">
+              <label for="radio4">4倍イベント</label>
+            </div>
+          </div>
+       <p class="Subject">２．倍率チェックリスト</p>
+          <div class="checkbox-area">
+            <div class="checkbox-group">
+              <input type="checkbox" id="checkBox1">
+              <label for="checkBox1">マンスリーパス効果(+15%)</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="checkBox2">
+              <label for="checkBox2">[ごめんねFingers crossed]梅澤美波<br>[まあいいか？]秋元真夏 どちらかを所持(+30%)</label>
+            </div>
+              <input type="text" id="multiplierInput" inputmode="decimal">
+              <label for="multiplierInput">％：メンバーノギメモ効果</label>
+          </div>
+        <p class="Subject">３．表示したいステージの数字を入力</p>
+          <div class="Stage-area">
+            <input type="text" id="startInput" inputmode="decimal">
+            <label for="startInput">から</label>
+            <input type="text" id="endInput" inputmode="decimal">
+            <label for="endInput">まで</label>

@@ -1,83 +1,680 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>乃木フラ 平均経験値</title>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="乃木フラ 平均経験値確認用">
-    <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/card.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPQQ5SW3QG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NPQQ5SW3QG');
-    </script>
-  </head>
-  <body>
-    <h1>乃木フラ 平均経験値</h1>
-    <div class="container">
-      <div class="item">
-        <p class="Subject">１．曜日(イベント)を選択</p>
+<html lang="jp">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/6.2.2/handsontable.full.css">
+　<meta name="viewport" content="width=device-width"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="乃木フラ 平均経験値確認用">
+  <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/card.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPQQ5SW3QG"></script>
+  <style>
+   * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font-family: inherit;
+      vertical-align: baseline;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin-top: -24px;
+      margin-bottom: 12px;
+      display: flex;
+      position: relative;
+      justify-content: center;
+      color: #812990;
+    }
+
+    label {
+      vertical-align: middle;
+    }
+
+    input[type="radio"] {
+      vertical-align: middle;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .checkbox-group label {
+      margin-left: 2px; 
+    }
+
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .textbox {
+      border: 0.8px solid black;
+    }
+
+    .result {
+      text-decoration: none;
+      display: flex;
+      margin: auto;
+      background-color: #812990;
+      border: 1px solid #000;
+      color: #fff;
+      transition: 0.5s;
+      margin-bottom: 5px;
+    }
+
+    .result:hover {
+      color: #812990;
+      background: #fff;
+    }
+
+    #grid {
+      border: 1px solid #000;
+      margin-bottom: 10px;
+    }
+
+    .handsontable thead th,
+    .handsontable tbody th{
+      background-color: #434343; 
+      color: #FFF;
+      font-weight: bold; 
+    }
+
+    #grid .htCore tbody tr:nth-child(even) td {
+      background-color: #f0f0f0;
+    }
+
+    #grid .htCore tbody tr:nth-child(odd) td {
+      background-color: #fff;
+    }
+
+    #grid .handsontable thead th.ht__highlight,
+    #grid .handsontable tbody th.ht__highlight{
+      background-color: #812990;
+    }  
+
+    #grid .handsontable .htDimmed {
+      background-color: #fff;
+      color: #000;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1da1f2;
+    }
+
+    .attention {
+      color: red;
+    }
+
+
+
+/* 画面幅<600 */
+  @media (max-width: 599px) {
+    h1 {
+    font-size: 25px;
+    }
+
+    .subject {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .subject::before {
+      content: "◢";
+      color: #812990;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    label {
+      font-size:12px;
+    }
+
+    .radio-area{
+      margin-left: 10px;
+    }
+
+    .radio-group{
+      margin: 8px;
+      vertical-align: middle;
+    }
+
+    .checkbox-group{
+      margin-left:18px;
+    }
+
+    input[type="radio"] {
+      width: 12px;
+      height: 12px;
+    }
+
+    input[type="checkbox"] {
+      width: 12px;
+      height: 12px;
+    }
+
+    .textbox-group{
+      margin-left: 18px;
+    }
+
+    .textbox {
+      width: 50px;
+      font-size:16px;
+    }
+
+    .result {
+      padding: 10px 40px;
+    }
+
+    #grid {
+      margin: auto;
+      height: 300px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .twitter {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .attention {
+      font-size: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+    }
+
+    ul li {
+      position: relative;
+    }
+
+    ul li:before {
+      content: "*";
+      position: absolute;
+      left: -5px;	
+    }
+	  
+}
+	  
+
+	  
+/* 画面幅600~959 */
+  @media (min-width: 600px) and (max-width: 959px) {
+    h1 {
+      font-size: 30px;
+    }
+
+    .subject {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .subject::before {
+      content: "◢";
+      color: #812990;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    label {
+      font-size: 16px;
+    }
+
+    .radio-area{
+      margin-left: 10px;
+    }
+
+    .radio-group{
+      margin: 8px;
+      vertical-align: middle;
+    }
+
+    .checkbox-group{
+      margin-left:18px;
+    }
+
+    input[type="radio"] {
+      width: 12px;
+      height: 12px;
+    }
+
+    input[type="checkbox"] {
+      width: 12px;
+      height: 12px;
+    }
+
+    .textbox-group{
+      margin-left: 18px;
+    }
+
+    .textbox {
+      width: 60px;
+    }
+
+    .result {
+      padding: 10px 40px;
+    }
+
+    #grid {
+      margin: auto;
+      height: 400px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .twitter {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .attention {
+      font-size: 12px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+    }
+
+    ul li {
+      position: relative;
+    }
+
+    ul li:before {
+      content: "*";
+      position: absolute;
+      left: -5px;	
+    }
+}
+
+  
+/* 画面幅960~ */
+  @media (min-width: 960px) { 
+    h1 {
+      font-size: 32px;
+      padding-bottom: 10px;
+    }
+
+    .container{
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .form{
+      display: flex;
+      margin: 0 auto;
+      max-width: 960px;
+    }
+
+    .event,
+    .multi,
+    .stage {
+      flex: 1;
+      border: 2px solid;
+      margin: 10px;
+      padding-bottom: 10px;
+    }	  
+
+    .subject {
+      font-size: 26px;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+
+    .radio-area{
+      margin-left: 30px;
+    }
+
+    label {
+      font-size: 12px;
+    }
+
+    .checkbox-group,
+    .textbox-group {
+      margin-left: 15px;
+    }
+
+    .textbox {
+      width: 70px;
+    }
+
+    .stage-area{
+      margin-top: 16px;
+    }
+
+    .result{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px 50px;
+    }
+
+    #grid {
+      height: 300px;
+      max-width: 940px;
+      overflow-x: auto;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      margin: 0 auto;
+      max-width: 960px;
+    }
+
+    .twitter {
+      margin-left: 10px;
+    }
+
+    .attention {
+      font-size: 12px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+      margin-left: 5px;
+    }
+
+    ul li {
+      position: relative;
+    }
+
+    ul li:before {
+      content: "*";
+      position: absolute;
+      left: -5px;	
+    }	  
+  }
+ 
+  </style>
+</head>
+<body onload="createGrid()">
+  <h1>乃木フラ 平均経験値</h1>
+  <div class"container">
+<!-- 曜日イベ選択 -->
+    <div class="form">
+      <div class="event">
+        <p class="subject">曜日(イベント)を選択</p>
+        <div class="radio-area">
           <div class="radio-group">
-            <div class="radio-item">
-              <input type="radio" id="radio1" name="radioButton" value="0">
-              <label for="radio1">水曜・日曜(等倍)</label>
-            </div>
-            <div class="radio-item">
-              <input type="radio" id="radio2" name="radioButton" value="1">
-              <label for="radio2">月曜・木曜・金曜(1.5倍)</label>
-            </div>
-            <div class="radio-item">
-              <input type="radio" id="radio3" name="radioButton" value="2">
-              <label for="radio3">火曜・土曜(2.5倍)</label>
-            </div>
-            <div class="radio-item">
-              <input type="radio" id="radio4" name="radioButton" value="3">
-              <label for="radio4">4倍イベント</label>
-            </div>
+            <input type="radio" id="radio1" name="radioButton" value="0">
+            <label for="radio1">水曜・日曜(等倍)</label>
           </div>
-       <p class="Subject">２．倍率チェックリスト</p>
-          <div class="checkbox-area">
-            <div class="checkbox-group">
-              <input type="checkbox" id="checkBox1">
-              <label for="checkBox1">マンスリーパス効果(+15%)</label>
-            </div>
-            <div class="checkbox-group">
-              <input type="checkbox" id="checkBox2">
-              <label for="checkBox2">[ごめんねFingers crossed]梅澤美波<br>[まあいいか？]秋元真夏 どちらかを所持(+30%)</label>
-            </div>
-              <input type="text" id="multiplierInput" inputmode="decimal">
-              <label for="multiplierInput">％：メンバーノギメモ効果</label>
+          <div class="radio-group">
+            <input type="radio" id="radio2" name="radioButton" value="1">
+            <label for="radio2">月曜・木曜・金曜(1.5倍)</label>
           </div>
-        <p class="Subject">３．表示したいステージの数字を入力</p>
-          <div class="Stage-area">
-            <input type="text" id="startInput" inputmode="decimal">
-            <label for="startInput">から</label>
-            <input type="text" id="endInput" inputmode="decimal">
-            <label for="endInput">まで</label>
-            <button class="button-style" onclick="updateTable()">表示</button>
+          <div class="radio-group">
+            <input type="radio" id="radio3" name="radioButton" value="2">
+            <label for="radio3">火曜・土曜(2.5倍)</label>
           </div>
-      </div>
-      <div class="item2">
-        <table id="table"></table>
-      </div>
-     </div>
-    
-    <div class="footer">
-        <div class="twitter">誤記・不具合等の連絡は
-          <a href="https://twitter.com/shida_23_" target="_blank">こちら
-          <i class="fa-brands fa-twitter"></i>
-          </a>へ
-          <p class="attention">※数字は半角で入力してください</p>
+          <div class="radio-group">
+            <input type="radio" id="radio4" name="radioButton" value="3">
+            <label for="radio4">4倍イベント</label>
+          </div>
         </div>
+      </div>
+<!-- 倍率指定 -->
+      <div class="multi">
+        <p class="subject">倍率指定</p>
+        <div class="checkbox-group">
+          <input type="checkbox" id="monthly">
+          <label for="monthly">マンスリーパス効果(+15%)</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="passive">
+          <label for="passive">[ごめんねFingers crossed]梅澤美波<br>[まあいいか？]秋元真夏 どちらかを所持(+30%)</label>
+        </div>
+        <div class="textbox-group">
+          <input type="text" class="textbox" id="memo" inputmode="decimal">
+          <label for="memo">％：メンバーノギメモ効果</label>
+        </div>
+      </div>
+<!-- 表示ステージ範囲 -->
+      <div class="stage">
+        <p class="subject">ステージ表示範囲指定</p>
+	<div class="stage-area">
+          <div class="textbox-group">
+            <input type="text" class="textbox" id="start" inputmode="decimal">
+            <label for="start">から</label>
+            <input type="text" class="textbox" id="end" inputmode="decimal">
+            <label for="end">まで</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="non120">
+            <label for="non120">120秒でない場合も表示(150以降のみ対応)</label>
+          </div>
+        </div>
+      </div>
     </div>
-  <script src="script.js"></script>
-  </body>
+    <button class="result" onclick="toggleData()">表示</button>
+<!-- handsontable -->
+    <div id="grid" style="display: none;"></div>
+  </div>
+<!-- footer -->
+  <div class="footer">
+    <div class="twitter">誤記・不具合等の連絡は
+      <a href="https://twitter.com/shida_23_" target="_blank">こちら
+        <i class="fa-brands fa-twitter"></i>
+      </a>へ
+    </div>
+    <ul class="attention">
+      <li>数字は半角で入力してください</li>
+      <li>(iPadをお使いの方)Safariで閲覧して挙動がおかしい場合はGoogle Chromeでの閲覧を推奨します</li>
+    </ul>
+  </div>
+<!-- script -->	
+<script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.min.js"></script>
+<script>
+  window.onload = function() {
+    restoreStateFromLocalStorage();
+    createGrid();
+  };
+
+  function saveStateToLocalStorage() {
+    const checkBox1 = document.getElementById("monthly");
+    const checkBox2 = document.getElementById("passive");
+    const multiplierInput = document.getElementById("memo");
+    const checkBox3 = document.getElementById("non120");
+
+    localStorage.setItem("checkbox1", checkBox1.checked);
+    localStorage.setItem("checkbox2", checkBox2.checked);
+    localStorage.setItem("multiplierInput", multiplierInput.value);
+    localStorage.setItem("checkbox3", checkBox3.checked);
+    }
+
+  function restoreStateFromLocalStorage() {
+    const checkBox1 = document.getElementById("monthly");
+    const checkBox2 = document.getElementById("passive");
+    const multiplierInput = document.getElementById("memo");
+    const checkBox3 = document.getElementById("non120");
+
+    const checkbox1Value = localStorage.getItem("checkbox1");
+    const checkbox2Value = localStorage.getItem("checkbox2");
+    const multiplierInputValue = localStorage.getItem("multiplierInput");
+    const checkbox3Value = localStorage.getItem("checkbox3");
+
+    if (checkbox1Value !== null) {
+      checkBox1.checked = checkbox1Value === "true";
+    }
+
+    if (checkbox2Value !== null) {
+      checkBox2.checked = checkbox2Value === "true";
+    }
+
+    if (multiplierInputValue !== null) {
+      multiplierInput.value = multiplierInputValue;
+    }
+
+    if (checkbox3Value !== null) {
+      checkBox3.checked = checkbox3Value === "true";
+    }
+  }
+
+  const checkBox1 = document.getElementById("monthly");
+  const checkBox2 = document.getElementById("passive");
+  const multiplierInput = document.getElementById("memo");
+  const checkBox3 = document.getElementById("non120");
+  checkBox1.addEventListener("change", saveStateToLocalStorage);
+  checkBox2.addEventListener("change", saveStateToLocalStorage);
+  multiplierInput.addEventListener("input", saveStateToLocalStorage);
+  checkBox3.addEventListener("change", saveStateToLocalStorage);
+	  
+  var checkbox = document.getElementById('non120');
+  var csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
+  var hot = null;
+
+  function createGrid() {
+    loadData();
+  }
+
+  function toggleData() {
+    checkbox = document.getElementById('non120');
+    csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
+
+    if (hot) {
+      hot.destroy();
+      hot = null;
+    }
+
+    var startValue = document.getElementById('start').value;
+    var start = parseInt(startValue);
+    var errorMessage = '';
+
+    if (isNaN(start) || startValue.trim() === '') {
+      errorMessage = 'ステージ表示範囲指定の入力欄は少なくとも左側には数値を入力してください。\n';
+    }
+
+    if (checkbox.checked && (isNaN(start) || start < 150)) {
+      errorMessage += '120秒でない場合も表示するときは150以上の数値にしてください。';
+    }
+
+    if (errorMessage !== '') {
+      alert(errorMessage);
+      return;
+    }
+
+    loadData();
+
+    document.getElementById('grid').style.display = 'block';
+  }
+
+  function loadData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	var csvData = xhr.responseText;
+	var data = parseCSV(csvData);
+        var start = parseInt(document.getElementById('start').value);
+        var end = document.getElementById('end').value;
+        if (end !== '') {
+          end = parseInt(end);
+          data = data.slice(start, end + 1);
+        } else {
+          data = data.slice(start);
+        }
+
+        if (data.length > 0) {
+          if (checkbox.checked) {
+            data.unshift(['', '120秒(30回/時間)', '124秒(29回/時間)', '128秒(28回/時間)', '133秒(27回/時間)', '138秒(26回/時間)', '144秒(25回/時間)', '150秒(24回/時間)', '156秒(23回/時間)', '163秒(22回/時間)', '171秒(21回/時間)', '180秒(20回/時間)', '189秒(19回/時間)', '200秒(18回/時間)']);
+          } else {
+            data.unshift(['', '1時間経験値']);
+          }
+        }
+
+        applyMultiplier(data);
+
+        if (hot) {
+          hot.updateSettings({
+            colHeaders: data[0],
+	    rowHeaders: data.map(function (value, index) {
+              return index === 0 ? '' : value[0];
+            }),
+          });
+          hot.loadData(data.slice(1));
+          } else {
+            hot = new Handsontable(document.getElementById('grid'), {
+              data: data.slice(1).map(row => row.slice(1)),
+  	      colHeaders: data[0].slice(1),
+  	      rowHeaders: data.slice(1).map(function (value, index) {
+    	        return value[0];
+  	      }),
+	      afterGetColHeader: function (col, TH) {
+    	        if (col === -1) {
+      	        TH.innerHTML = 'ステージ';
+    	        }
+  	      },
+              manualColumnResize: true,
+	      editable: false,
+              fillHandle: false,
+              fixedColumnsLeft: 0,
+              fixedRowsTop: 0,
+	      rowHeaderWidth: 72,
+              readOnly: true
+            });
+          }
+        }
+      };
+      xhr.open('GET', csvFile, true);
+      xhr.send();
+    }
+
+    function parseCSV(csvData) {
+      var lines = csvData.split('\n');
+      var data = [];
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (line !== '') {
+          var values = line.split(',');
+          data.push(values);
+        }
+      }
+      return data;
+    }
+
+    function applyMultiplier(data) {
+      var radioButtons = document.getElementsByName('radioButton');
+      var multiplier = 1.0;
+      for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+          if (i === 1) {
+            multiplier = 1.5;
+          } else if (i === 2) {
+            multiplier = 2.5;
+          } else if (i === 3) {
+            multiplier = 4;
+          }
+          break;
+        }
+      }
+
+      var monthlyCheckbox = document.getElementById('monthly');
+      var passiveCheckbox = document.getElementById('passive');
+      var memoInput = document.getElementById('memo');
+
+      var monthlyMultiplier = monthlyCheckbox.checked ? 0.15 : 0;
+      var passiveMultiplier = passiveCheckbox.checked ? 0.3 : 0;
+      var memoMultiplier = parseFloat(memoInput.value) || 0;
+
+      for (var row = 1; row < data.length; row++) {
+        for (var col = 1; col < data[row].length; col++) {
+          var value = parseFloat(data[row][col]) || 0;
+          var result = Math.round(value * multiplier * (1 + monthlyMultiplier + passiveMultiplier + (memoMultiplier / 100)));
+          data[row][col] = result.toLocaleString();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

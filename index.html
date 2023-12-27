@@ -25,7 +25,7 @@
       padding: 0;
       border: 0;
       font-size: 100%;
-      font-family: inherit;
+      font-family: sans-serif ;
       vertical-align: baseline;
       box-sizing: border-box;
     }
@@ -174,7 +174,15 @@
 
     .textbox {
       width: 50px;
-      font-size:16px;
+      font-size: 16px;
+    }
+
+    .range-slider{
+      margin: 16px;
+    }
+
+    .range-text{
+      font-size: 14px;
     }
 
     .result {
@@ -269,6 +277,14 @@
       width: 60px;
     }
 
+    .range-slider{
+      margin: 16px;
+    }
+
+    .range-text{
+      font-size: 16px;
+    }
+
     .result {
       padding: 10px 40px;
     }
@@ -360,6 +376,14 @@
       margin-top: 16px;
     }
 
+    .range-slider{
+      margin: 13px;
+    }
+
+    .range-text{
+      font-size: 12px;
+    }
+
     .result{
       margin-top: 20px;
       margin-bottom: 20px;
@@ -446,6 +470,13 @@
         <div class="textbox-group">
           <input type="text" class="textbox" id="memo" inputmode="decimal">
           <label for="memo">％：メンバーノギメモ効果</label>
+        </div>
+	<div class="range-slider">
+	  <label for="rangeSlider" class="range-text">上振れ補正</label>	
+          <input type="range" id="rangeSlider" min="0" max="5" step="0.5" value="0" oninput="updateRangeValue()">
+	  <span class="range-text">+</span>
+          <span class="range-label" id="rangeLabel">0</span>
+	  <span class="range-text">[%]</span>
         </div>
       </div>
 <!-- 表示ステージ範囲 -->
@@ -650,6 +681,11 @@
       return data;
     }
 
+    function updateRangeValue() {
+        var rangeValue = document.getElementById("rangeSlider").value;
+        document.getElementById("rangeLabel").innerText = rangeValue;
+    }
+
     function applyMultiplier(data) {
       var radioButtons = document.getElementsByName('radioButton');
       var multiplier = 1.0;
@@ -666,6 +702,7 @@
         }
       }
 
+
       var monthlyCheckbox = document.getElementById('monthly');
       var passiveCheckbox = document.getElementById('passive');
       var memoInput = document.getElementById('memo');
@@ -673,11 +710,13 @@
       var monthlyMultiplier = monthlyCheckbox.checked ? 0.15 : 0;
       var passiveMultiplier = passiveCheckbox.checked ? 0.3 : 0;
       var memoMultiplier = parseFloat(memoInput.value) || 0;
+      var rangeSliderValue = parseFloat(document.getElementById("rangeSlider").value) || 0;
+
 
       for (var row = 1; row < data.length; row++) {
         for (var col = 1; col < data[row].length; col++) {
           var value = parseFloat(data[row][col]) || 0;
-          var result = Math.round(value * multiplier * (1 + monthlyMultiplier + passiveMultiplier + (memoMultiplier / 100)));
+          var result = Math.round(value * multiplier * (1 + (rangeSliderValue / 100)) * (1 + monthlyMultiplier + passiveMultiplier + (memoMultiplier / 100)));
           data[row][col] = result.toLocaleString();
         }
       }

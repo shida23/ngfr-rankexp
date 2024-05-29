@@ -121,6 +121,10 @@
       color: red;
     }
 
+    #stage-count td{
+	border-top: 1px solid #000;
+    }
+
 
 
 /* 画面幅<600 */
@@ -510,6 +514,43 @@
     <ul class="attention">
       <li>数字は半角で入力してください</li>
     </ul>
+    <table id="stage-count">
+    <thead>
+        <tr>
+	  <th>ステージ</th>
+	  <th>理想回数</th>
+	</tr>
+      </thead>
+    <tbody>
+          <tr>
+            <td>260～</td>
+            <td>27回</td>
+          </tr>
+          <tr>
+            <td>150～259</td>
+            <td>30回</td>
+          </tr>
+          <tr>
+            <td>61～149</td>
+            <td>32回</td>
+          </tr>
+          <tr>
+            <td>56～60</td>
+            <td>34回</td>
+          </tr>
+          <tr>
+            <td>51～55</td>
+            <td>36回</td>
+          </tr>
+          <tr>
+            <td>46～50</td>
+            <td>39回</td>
+          </tr>
+          <tr>
+            <td colspan="2">以下省略</td>
+          </tr>
+        </tbody>
+    </table>
   </div>
 <!-- script -->	
 <script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.0/dist/handsontable.full.min.js"></script>
@@ -624,7 +665,7 @@
 
         if (data.length > 0) {
           if (checkbox.checked) {
-            data.unshift(['', '120秒(30回/時間)', '124秒(29回/時間)', '128秒(28回/時間)', '133秒(27回/時間)', '138秒(26回/時間)', '144秒(25回/時間)', '150秒(24回/時間)', '156秒(23回/時間)', '163秒(22回/時間)', '171秒(21回/時間)', '180秒(20回/時間)', '189秒(19回/時間)', '200秒(18回/時間)']);
+            data.unshift(['', '理想回数', '理想-1回', '理想-2回', '理想-3回', '理想-4回', '理想-5回', '理想-6回', '理想-7回', '理想-8回', '理想-9回', '理想-10回', '理想-11回', '理想-12回']);
           } else {
             data.unshift(['', '1時間経験値']);
           }
@@ -652,6 +693,13 @@
       	        TH.innerHTML = 'ステージ';
     	        }
   	      },
+	      cells: function (row, col) {
+                const cellProperties = {};
+                if (row >= 0 && col >= 0) {
+                  cellProperties.className = 'htRight';
+                }
+              return cellProperties;
+              },
               manualColumnResize: true,
 	      editable: false,
               fillHandle: false,

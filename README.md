@@ -13,6 +13,3 @@ https://shida23.github.io/ngfr-rankexp/
 誤記、不具合、要望などはこちらへお願いします。
 
 ---
-
-## 使用ライブラリ
-Handsontable https://github.com/handsontable/handsontable/issues/5831

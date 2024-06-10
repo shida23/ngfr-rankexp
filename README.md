@@ -13,3 +13,7 @@ https://shida23.github.io/ngfr-rankexp/
 誤記、不具合、要望などはこちらへお願いします。
 
 ---
+
+## 使用ライブラリ
+
+[DataTables(MIT license)](https://datatables.net/license/mit)

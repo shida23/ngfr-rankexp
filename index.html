@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/6.2.2/handsontable.full.css">
-　<meta name="viewport" content="width=device-width"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <title>乃木フラ 平均経験値確認</title>
+  <link rel="stylesheet" href="style.css">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="乃木フラ 平均経験値確認用">
-  <title>乃木フラ 平均経験値確認用</title>
-  <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/card.png">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="twitter:image" content="https://shida23.github.io/ngfr-rankexp/images/card.png">
+  <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPQQ5SW3QG"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,754 +20,110 @@
       gtag('js', new Date());
       gtag('config', 'G-NPQQ5SW3QG');
   </script>
-  <style>
-   * {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      font-size: 100%;
-      font-family: sans-serif ;
-      vertical-align: baseline;
-      box-sizing: border-box;
-    }
-
-    h1 {
-      margin-top: -24px;
-      margin-bottom: 12px;
-      display: flex;
-      position: relative;
-      justify-content: center;
-      color: #812990;
-    }
-
-    label {
-      vertical-align: middle;
-    }
-
-    input[type="radio"] {
-      vertical-align: middle;
-    }
-
-    .checkbox-group {
-      display: flex;
-      align-items: center;
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-
-    .checkbox-group label {
-      margin-left: 2px; 
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-
-    .textbox {
-      border: 0.8px solid black;
-    }
-
-    .result {
-      text-decoration: none;
-      display: flex;
-      margin: auto;
-      background-color: #812990;
-      border: 1px solid #000;
-      color: #fff;
-      transition: 0.5s;
-      margin-bottom: 5px;
-    }
-
-    .result:hover {
-      color: #812990;
-      background: #fff;
-    }
-
-    #grid {
-      border: 1px solid #000;
-      margin-bottom: 10px;
-    }
-
-    .handsontable thead th,
-    .handsontable tbody th{
-      background-color: #434343; 
-      color: #FFF;
-      font-weight: bold; 
-    }
-
-    #grid .htCore tbody tr:nth-child(even) td {
-      background-color: #f0f0f0;
-    }
-
-    #grid .htCore tbody tr:nth-child(odd) td {
-      background-color: #fff;
-    }
-
-    #grid .handsontable thead th.ht__highlight,
-    #grid .handsontable tbody th.ht__highlight{
-      background-color: #812990;
-    }  
-
-    #grid .handsontable .htDimmed {
-      background-color: #fff;
-      color: #000;
-    }
-
-    a {
-      text-decoration: none;
-      color: #1da1f2;
-    }
-
-    .attention {
-      color: red;
-    }
-
-    #stage-count td{
-	border-top: 1px solid #000;
-    }
-
-
-
-/* 画面幅<600 */
-  @media (max-width: 599px) {
-    h1 {
-    font-size: 25px;
-    }
-
-    .subject {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .subject::before {
-      content: "◢";
-      color: #812990;
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    label {
-      font-size:12px;
-    }
-
-    .radio-area{
-      margin-left: 10px;
-    }
-
-    .radio-group{
-      margin: 8px;
-      vertical-align: middle;
-    }
-
-    .checkbox-group{
-      margin-left:18px;
-    }
-
-    input[type="radio"] {
-      width: 12px;
-      height: 12px;
-    }
-
-    input[type="checkbox"] {
-      width: 12px;
-      height: 12px;
-    }
-
-    .textbox-group{
-      margin-left: 18px;
-    }
-
-    .textbox {
-      width: 50px;
-      font-size: 16px;
-    }
-
-    .range-slider{
-      margin: 16px;
-    }
-
-    .range-text{
-      font-size: 14px;
-    }
-
-    .result {
-      padding: 10px 40px;
-    }
-
-    #grid {
-      margin: auto;
-      height: 300px;
-      max-width: 100%;
-      overflow-x: auto;
-    }
-
-    .twitter {
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
-
-    .attention {
-      font-size: 10px;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 1em;
-    }
-
-    ul li {
-      position: relative;
-    }
-
-    ul li:before {
-      content: "*";
-      position: absolute;
-      left: -5px;	
-    }
-	  
-}
-	  
-
-	  
-/* 画面幅600~959 */
-  @media (min-width: 600px) and (max-width: 959px) {
-    h1 {
-      font-size: 30px;
-    }
-
-    .subject {
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
-
-    .subject::before {
-      content: "◢";
-      color: #812990;
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    label {
-      font-size: 16px;
-    }
-
-    .radio-area{
-      margin-left: 10px;
-    }
-
-    .radio-group{
-      margin: 8px;
-      vertical-align: middle;
-    }
-
-    .checkbox-group{
-      margin-left:18px;
-    }
-
-    input[type="radio"] {
-      width: 12px;
-      height: 12px;
-    }
-
-    input[type="checkbox"] {
-      width: 12px;
-      height: 12px;
-    }
-
-    .textbox-group{
-      margin-left: 18px;
-    }
-
-    .textbox {
-      width: 60px;
-    }
-
-    .range-slider{
-      margin: 16px;
-    }
-
-    .range-text{
-      font-size: 16px;
-    }
-
-    .result {
-      padding: 10px 40px;
-    }
-
-    #grid {
-      margin: auto;
-      height: 400px;
-      max-width: 100%;
-      overflow-x: auto;
-    }
-
-    .twitter {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .attention {
-      font-size: 12px;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 1em;
-    }
-
-    ul li {
-      position: relative;
-    }
-
-    ul li:before {
-      content: "*";
-      position: absolute;
-      left: -5px;	
-    }
-}
-
-  
-/* 画面幅960~ */
-  @media (min-width: 960px) { 
-    h1 {
-      font-size: 32px;
-      padding-bottom: 10px;
-    }
-
-    .container{
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .form{
-      display: flex;
-      margin: 0 auto;
-      max-width: 960px;
-    }
-
-    .event,
-    .multi,
-    .stage {
-      flex: 1;
-      border: 2px solid;
-      margin: 10px;
-      padding-bottom: 10px;
-    }	  
-
-    .subject {
-      font-size: 26px;
-      margin-bottom: 2px;
-      text-align: center;
-    }
-
-    .radio-area{
-      margin-left: 30px;
-    }
-
-    label {
-      font-size: 12px;
-    }
-
-    .checkbox-group,
-    .textbox-group {
-      margin-left: 15px;
-    }
-
-    .textbox {
-      width: 70px;
-    }
-
-    .stage-area{
-      margin-top: 16px;
-    }
-
-    .range-slider{
-      margin: 13px;
-    }
-
-    .range-text{
-      font-size: 12px;
-    }
-
-    .result{
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 10px 50px;
-    }
-
-    #grid {
-      height: 300px;
-      max-width: 940px;
-      overflow-x: auto;
-      margin: auto;
-      margin-bottom: 20px;
-    }
-
-    .footer {
-      margin: 0 auto;
-      max-width: 960px;
-    }
-
-    .twitter {
-      margin-left: 10px;
-    }
-
-    .attention {
-      font-size: 12px;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 1em;
-      margin-left: 5px;
-    }
-
-    ul li {
-      position: relative;
-    }
-
-    ul li:before {
-      content: "*";
-      position: absolute;
-      left: -5px;	
-    }	  
-  }
- 
-  </style>
 </head>
-<body onload="createGrid()">
-  <h1>乃木フラ 平均経験値</h1>
-  <div class"container">
-<!-- 曜日イベ選択 -->
-    <div class="form">
-      <div class="event">
-        <p class="subject">曜日(イベント)を選択</p>
-        <div class="radio-area">
-          <div class="radio-group">
-            <input type="radio" id="radio1" name="radioButton" value="0">
-            <label for="radio1">水曜・日曜(等倍)</label>
-          </div>
-          <div class="radio-group">
-            <input type="radio" id="radio2" name="radioButton" value="1">
-            <label for="radio2">月曜・木曜・金曜(1.5倍)</label>
-          </div>
-          <div class="radio-group">
-            <input type="radio" id="radio3" name="radioButton" value="2">
-            <label for="radio3">火曜・土曜(2.5倍)</label>
-          </div>
-          <div class="radio-group">
-            <input type="radio" id="radio4" name="radioButton" value="3">
-            <label for="radio4">4倍イベント</label>
-          </div>
+<body>
+  <h1>乃木フラ 平均経験値確認</h1>
+  <form id="settingsForm">
+    <div class="form-group">
+      <P class="section">曜日選択</p>
+        <div class="radio-group">
+          <label><input type="radio" name="day" value="1" checked> 水・日(等倍)</label>
+          <label><input type="radio" name="day" value="1.5"> 月・木・金(1.5倍)</label>
+          <label><input type="radio" name="day" value="2.5"> 火・土(2.5倍)</label>
+          <label><input type="radio" name="day" value="4"> 4倍イベント</label>
         </div>
+    </div>
+    <div class="form-group">
+      <div class="section-group">
+        <p class="section">倍率指定</p>
+        <i class="fa-solid fa-circle-info" id="infoButton"></i>
       </div>
-<!-- 倍率指定 -->
-      <div class="multi">
-        <p class="subject">倍率指定</p>
-        <div class="checkbox-group">
-          <input type="checkbox" id="monthly">
-          <label for="monthly">マンスリーパス効果(+15%)</label>
-        </div>
-        <div class="checkbox-group">
-          <input type="checkbox" id="passive">
-          <label for="passive">[ごめんねFingers crossed]梅澤美波<br>[まあいいか？]秋元真夏 どちらかを所持(+30%)</label>
-        </div>
-        <div class="textbox-group">
-          <input type="text" class="textbox" id="memo" inputmode="decimal">
-          <label for="memo">％：メンバーノギメモ効果</label>
-        </div>
-	<div class="range-slider">
-	  <label for="rangeSlider" class="range-text">上振れ補正</label>	
-          <input type="range" id="rangeSlider" min="0" max="5" step="0.5" value="0" oninput="updateRangeValue()">
-	  <span class="range-text">+</span>
-          <span class="range-label" id="rangeLabel">0</span>
-	  <span class="range-text">[%]</span>
-        </div>
+      <div class="multi-group">
+        経験値ボーナス：<input type="text" id="bonus" name="bonus" inputmode="decimal">％
       </div>
-<!-- 表示ステージ範囲 -->
-      <div class="stage">
-        <p class="subject">ステージ表示範囲指定</p>
-	<div class="stage-area">
-          <div class="textbox-group">
-            <input type="text" class="textbox" id="start" inputmode="decimal">
-            <label for="start">から</label>
-            <input type="text" class="textbox" id="end" inputmode="decimal">
-            <label for="end">まで</label>
-          </div>
-          <div class="checkbox-group">
-            <input type="checkbox" id="non120">
-            <label for="non120">120秒でない場合も表示(150以降のみ対応)</label>
-          </div>
-        </div>
+      <div class="form-group slider-container multi-group">
+        <label for="rangeslider">上振れ補正</label>
+        <input type="range" id="rangeslider" name="rangeslider" min="0" max="5" step="0.5" value="0">
+        ＋<span id="range-number">0</span>[%]
       </div>
     </div>
-    <button class="result" onclick="toggleData()">表示</button>
-<!-- handsontable -->
-    <div id="grid" style="display: none;"></div>
-  </div>
-<!-- footer -->
-  <div class="footer">
-    <div class="twitter">誤記・不具合等の連絡は
-      <a href="https://twitter.com/shida_23_" target="_blank">こちら
-        <i class="fa-brands fa-twitter"></i>
-      </a>へ
+    <div class="form-group">
+      <p class="section">ステージ範囲指定</p>
+      <div class="range-group">
+        <input type="text" id="start" name="start" inputmode="decimal"><span class="range-text">から</span>
+        <input type="text" id="end" name="end" inputmode="decimal"><span class="range-text">まで</span>
+      </div>
     </div>
-    <ul class="attention">
-      <li>数字は半角で入力してください</li>
-    </ul>
-    <table id="stage-count">
-    <thead>
-        <tr>
-	  <th>ステージ</th>
-	  <th>理想回数</th>
-	</tr>
+    <button type="button" id="displayButton">表示</button>
+  </form>
+  <div class="table-container">
+    <table id="resultTable" class="display" style="width:100%">
+      <thead>
+        <tr></tr>
       </thead>
-    <tbody>
-          <tr>
-            <td>260～</td>
-            <td>27回</td>
-          </tr>
-          <tr>
-            <td>150～259</td>
-            <td>30回</td>
-          </tr>
-          <tr>
-            <td>61～149</td>
-            <td>32回</td>
-          </tr>
-          <tr>
-            <td>56～60</td>
-            <td>34回</td>
-          </tr>
-          <tr>
-            <td>51～55</td>
-            <td>36回</td>
-          </tr>
-          <tr>
-            <td>46～50</td>
-            <td>39回</td>
-          </tr>
-          <tr>
-            <td colspan="2">以下省略</td>
-          </tr>
-        </tbody>
+      <tbody></tbody>
     </table>
   </div>
-<!-- script -->	
-<script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.0/dist/handsontable.full.min.js"></script>
-<script>
-  window.onload = function() {
-    restoreStateFromLocalStorage();
-    createGrid();
-  };
 
-  function saveStateToLocalStorage() {
-    const checkBox1 = document.getElementById("monthly");
-    const checkBox2 = document.getElementById("passive");
-    const multiplierInput = document.getElementById("memo");
-    const checkBox3 = document.getElementById("non120");
+  <button class="accordion">理想回数について<span class="icon">+</span></button>
+  <div class="panel">
+    <p>各ステージに設けられている&#9312;[目標クリア秒数/ライブ]以内で15回連続成功すると
+       &#9313;[平均時間/回]が最短になります。
+    </p>
+    <p>
+       その状態の&#9314;[ライブ回数/時間]を【理想回数】と表記しています。
+       プロデュース画面の[ライブ回数/時間]と照らし合わせて下さい。
+    </p>
+    <img src="images/ideal.png" alt="ideal image" style="width:100%;">
+    <table>
+      <thead>
+        <tr>
+          <th>ステージ</th><th>理想回数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>260～</td><td>27</td></tr>
+        <tr><td>150～259</td><td>30</td></tr>
+        <tr><td>61～149</td><td>32</td></tr>
+        <tr><td>56～60</td><td>34</td></tr>
+        <tr><td>51～55</td><td>36</td></tr>
+        <tr><td>46～50</td><td>39</td></tr>
+        <tr><td>41～45</td><td>41</td></tr>
+        <tr><td>36～40</td><td>45</td></tr>
+        <tr><td>31～35</td><td>48</td></tr>
+        <tr><td>26～30</td><td>52</td></tr>
+        <tr><td>21～25</td><td>58</td></tr>
+        <tr><td>16～20</td><td>64</td></tr>
+        <tr><td>11～15</td><td>72</td></tr>
+        <tr><td>6～10</td><td>81</td></tr>
+        <tr><td>1～5</td><td>94</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    localStorage.setItem("checkbox1", checkBox1.checked);
-    localStorage.setItem("checkbox2", checkBox2.checked);
-    localStorage.setItem("multiplierInput", multiplierInput.value);
-    localStorage.setItem("checkbox3", checkBox3.checked);
-    }
-
-  function restoreStateFromLocalStorage() {
-    const checkBox1 = document.getElementById("monthly");
-    const checkBox2 = document.getElementById("passive");
-    const multiplierInput = document.getElementById("memo");
-    const checkBox3 = document.getElementById("non120");
-
-    const checkbox1Value = localStorage.getItem("checkbox1");
-    const checkbox2Value = localStorage.getItem("checkbox2");
-    const multiplierInputValue = localStorage.getItem("multiplierInput");
-    const checkbox3Value = localStorage.getItem("checkbox3");
-
-    if (checkbox1Value !== null) {
-      checkBox1.checked = checkbox1Value === "true";
-    }
-
-    if (checkbox2Value !== null) {
-      checkBox2.checked = checkbox2Value === "true";
-    }
-
-    if (multiplierInputValue !== null) {
-      multiplierInput.value = multiplierInputValue;
-    }
-
-    if (checkbox3Value !== null) {
-      checkBox3.checked = checkbox3Value === "true";
-    }
-  }
-
-  const checkBox1 = document.getElementById("monthly");
-  const checkBox2 = document.getElementById("passive");
-  const multiplierInput = document.getElementById("memo");
-  const checkBox3 = document.getElementById("non120");
-  checkBox1.addEventListener("change", saveStateToLocalStorage);
-  checkBox2.addEventListener("change", saveStateToLocalStorage);
-  multiplierInput.addEventListener("input", saveStateToLocalStorage);
-  checkBox3.addEventListener("change", saveStateToLocalStorage);
-	  
-  var checkbox = document.getElementById('non120');
-  var csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
-  var hot = null;
-
-  function createGrid() {
-    loadData();
-  }
-
-  function toggleData() {
-    checkbox = document.getElementById('non120');
-    csvFile = checkbox.checked ? 'xp1.csv' : 'xp.csv';
-
-    if (hot) {
-      hot.destroy();
-      hot = null;
-    }
-
-    var startValue = document.getElementById('start').value;
-    var start = parseInt(startValue);
-    var errorMessage = '';
-
-    if (isNaN(start) || startValue.trim() === '') {
-      errorMessage = 'ステージ表示範囲指定の入力欄は少なくとも左側には数値を入力してください。\n';
-    }
-
-    if (checkbox.checked && (isNaN(start) || start < 150)) {
-      errorMessage += '120秒でない場合も表示するときは150以上の数値にしてください。';
-    }
-
-    if (errorMessage !== '') {
-      alert(errorMessage);
-      return;
-    }
-
-    loadData();
-
-    document.getElementById('grid').style.display = 'block';
-  }
-
-  function loadData() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-	var csvData = xhr.responseText;
-	var data = parseCSV(csvData);
-        var start = parseInt(document.getElementById('start').value);
-        var end = document.getElementById('end').value;
-        if (end !== '') {
-          end = parseInt(end);
-          data = data.slice(start, end + 1);
-        } else {
-          data = data.slice(start);
-        }
-
-        if (data.length > 0) {
-          if (checkbox.checked) {
-            data.unshift(['', '理想回数', '理想-1回', '理想-2回', '理想-3回', '理想-4回', '理想-5回', '理想-6回', '理想-7回', '理想-8回', '理想-9回', '理想-10回', '理想-11回', '理想-12回']);
-          } else {
-            data.unshift(['', '1時間経験値']);
-          }
-        }
-
-        applyMultiplier(data);
-
-        if (hot) {
-          hot.updateSettings({
-            colHeaders: data[0],
-	    rowHeaders: data.map(function (value, index) {
-              return index === 0 ? '' : value[0];
-            }),
-          });
-          hot.loadData(data.slice(1));
-          } else {
-            hot = new Handsontable(document.getElementById('grid'), {
-              data: data.slice(1).map(row => row.slice(1)),
-  	      colHeaders: data[0].slice(1),
-  	      rowHeaders: data.slice(1).map(function (value, index) {
-    	        return value[0];
-  	      }),
-	      afterGetColHeader: function (col, TH) {
-    	        if (col === -1) {
-      	        TH.innerHTML = 'ステージ';
-    	        }
-  	      },
-	      cells: function (row, col) {
-                const cellProperties = {};
-                if (row >= 0 && col >= 0) {
-                  cellProperties.className = 'htRight';
-                }
-              return cellProperties;
-              },
-              manualColumnResize: true,
-	      editable: false,
-              fillHandle: false,
-              fixedColumnsLeft: 0,
-              fixedRowsTop: 0,
-	      rowHeaderWidth: 72,
-              readOnly: true
-            });
-          }
-        }
-      };
-      xhr.open('GET', csvFile, true);
-      xhr.send();
-    }
-
-    function parseCSV(csvData) {
-      var lines = csvData.split('\n');
-      var data = [];
-      for (var i = 0; i < lines.length; i++) {
-        var line = lines[i].trim();
-        if (line !== '') {
-          var values = line.split(',');
-          data.push(values);
-        }
-      }
-      return data;
-    }
-
-    function updateRangeValue() {
-        var rangeValue = document.getElementById("rangeSlider").value;
-        document.getElementById("rangeLabel").innerText = rangeValue;
-    }
-
-    function applyMultiplier(data) {
-      var radioButtons = document.getElementsByName('radioButton');
-      var multiplier = 1.0;
-      for (var i = 0; i < radioButtons.length; i++) {
-        if (radioButtons[i].checked) {
-          if (i === 1) {
-            multiplier = 1.5;
-          } else if (i === 2) {
-            multiplier = 2.5;
-          } else if (i === 3) {
-            multiplier = 4;
-          }
-          break;
-        }
-      }
-
-
-      var monthlyCheckbox = document.getElementById('monthly');
-      var passiveCheckbox = document.getElementById('passive');
-      var memoInput = document.getElementById('memo');
-
-      var monthlyMultiplier = monthlyCheckbox.checked ? 0.15 : 0;
-      var passiveMultiplier = passiveCheckbox.checked ? 0.3 : 0;
-      var memoMultiplier = parseFloat(memoInput.value) || 0;
-      var rangeSliderValue = parseFloat(document.getElementById("rangeSlider").value) || 0;
-
-      for (var row = 1; row < data.length; row++) {
-        for (var col = 1; col < data[row].length; col++) {
-          var value = parseFloat(data[row][col]) || 0;
-          var result = Math.round(value * multiplier * (1 + (rangeSliderValue / 100)) * (1 + monthlyMultiplier + passiveMultiplier + (memoMultiplier / 100)));
-          data[row][col] = result.toLocaleString();
-        }
-      }
-    }
-  </script>
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>経験値ボーナス</h2>
+      <p>プロデュース画面の経験値ボーナスの数値をそのまま記入してください。</p>
+      <p>(画像赤枠参照、この場合は51.7と入力)</p>
+      <img src="images/multi-info.png" alt="multi-info image" style="width:100%;">
+      <h2>上振れ補正</h2>
+      <p>私調べですが、プロデュース画面の1番上の項目[経験値入手/時間]の数値において±5%前後の振れを確認しています。上振れ具合の確認用に導入しました。</p>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="attention">
+      <p>数字は半角で入力してください</p>
+      <p>表を幅広く見たい方は横画面を推奨します</p>
+    </div>
+    <div class="twitter">誤記・不具合等の連絡は
+      <a href="https://x.com/shida_23_" target="_blank">こちら
+        <i class="fa-brands fa-x-twitter"></i>(
+        <i class="fa-brands fa-twitter"></i>)
+      </a>へ
+    </div>
+  </div>
+<script src="script.js"></script>
 </body>
 </html>

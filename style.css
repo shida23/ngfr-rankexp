@@ -2,6 +2,9 @@
       font-family: 'Open Sans', sans-serif;
       font-weight: 300;
     }
+    body{
+      background-color: white;
+    }
     h1 {
       margin: 0;
       text-align: center;
@@ -88,7 +91,6 @@
       outline: none;
       font-size: 14px;
       transition: 0.4s;
-      display: none;
     }
     .accordion .icon {
       float: right;

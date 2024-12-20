@@ -246,7 +246,7 @@
         margin: 0 auto;
       }
       img{
-        max-width: 800px;
+        max-width: 600px;
       }
       #displayButton {
         padding: 8px 40px;
@@ -260,7 +260,7 @@
         font-size: 12px;
       }
       .panel p {
-        font-size: 12px;
+        font-size: 14px;
         margin: 0 16px;
       }
     }

@@ -75,7 +75,6 @@
       border: 1px solid #000;
     }
     img {
-      max-width: 400px;
       display: flex;
       margin: 0 auto;
     }
@@ -218,6 +217,9 @@
       body {
         margin: 0 8px;
       }
+      img{
+        max-width: 400px;
+      }
       #displayButton {
         padding: 6px 30px;
       }
@@ -243,6 +245,9 @@
         width: 90%;
         margin: 0 auto;
       }
+      img{
+        max-width: 600px;
+      }
       #displayButton {
         padding: 8px 40px;
       }
@@ -264,6 +269,9 @@
         max-width: 900px;
         width: 90%;
         margin: 0 auto;
+      }
+      img{
+        max-width: 600px;
       }
       h1 {
         font-size: 24px;

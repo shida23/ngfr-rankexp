@@ -175,9 +175,12 @@
     .twitter {
       font-size: 14px;
     }
-    a {
+    .twitter a {
       text-decoration: none;
       color: #1da1f2;
+    }
+    .link {
+      font-size:14px;
     }
     @media (max-width: 1024px) {
       h1 {

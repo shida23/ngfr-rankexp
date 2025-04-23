@@ -1,322 +1,218 @@
-* {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 300;
+/* ライトモード */
+:root {
+    --bg-color: #fff;
+    --text-color: #000;
+    --primary-color: #007bff;
+    --secondary-color: #f0f0f0;
+    --border-color: #ccc;
+    --button-text: #000;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --primary-color: #1e90ff;
+        --secondary-color: #333;
+        --border-color: #555;
+        --button-text: #fff;
     }
-    body{
-      background-color: white;
-    }
-    h1 {
-      margin: 0;
-      text-align: center;
-    }
-    .section {
-      margin: 0;
-    }
-    .section-group{
-      display: flex;
-    }
-    .section::before {
-      content: "◢";
-      color: #812990;
-    }
-    #infoButton {
-      color: #00bfff;
-      cursor: pointer;
-      margin: 5px 0 0 5px;
-    }
-    input[type="text"] {
-      font-size: 16px;
-      width: 50px;
-      height: 16px;
-    }
-    #displayButton {
-      display: flex;
-      margin: 4px auto;
-      color: white;
-      background-color: #812990;
-    }
-    .table-container {
-      position: relative;
-      width: 100%;
-      overflow: auto;
-      white-space: nowrap;
-    }
-    table.dataTable thead th, table.dataTable tfoot th, table.dataTable thead th:first-child {
-      font-weight: bold;
-      background: #434343;
-      color: white;
-      position: sticky;
-      z-index: 100;
-      padding: 3px;
-    }
-    table.dataTable tbody tr:nth-child(even), table.dataTable tbody tr:nth-child(odd) {
-      background-color: #e6e6e6;
-    }
-    table.dataTable tbody tr:nth-child(odd) {
-      background-color: #fff;
-    }
-    table.dataTable tbody th, table.dataTable tbody td:first-child {
-      position: sticky;
-      left: 0;
-      background: #434343;
-      color: white;
-      z-index: 99;
-      text-align: center;
-    }
-    table.dataTable tbody td {
-      padding: 3px;
-      text-align: right;
-    }
-    table.dataTable {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    table.dataTable thead th, table.dataTable tbody td {
-      border: 1px solid #000;
-    }
-    img {
-      display: flex;
-      margin: 0 auto;
-    }
-    .accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      padding: 12px;
-      width: 100%;
-      height: 95%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 14px;
-      transition: 0.4s;
-    }
-    .accordion .icon {
-      float: right;
-      font-size: 18px;
-    }
-    .active, .accordion:hover {
-      background-color: #ccc;
-    }
-    .panel {
-      background-color: #eee;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease-out;
-    }
-    .panel img {
-      margin: 10px auto;
-    }
-    .panel table {
-      text-align: center;
-      margin: 0 auto;
-      border-collapse: collapse;
-      border: solid 2px black;
-    }
-    .panel table th {
-      border-bottom: double 2px black;
-      border-right: solid 1px black;
-    }
-    .panel table td {
-      border: solid 1px black;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-    }
-    .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 84%;
-      max-height: 80%;
-      max-width: 750px;
-      overflow-y: auto;
-      position: relative;
-    }
-    .close {
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      cursor: pointer;
-    }
-    .close:hover, .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .modal-content h2 {
-      margin-bottom: 10px;
-    }
-    .modal-content p {
-      margin: 0;
-    }
-    .attention {
-      color: red;
-      font-size: 12px;
-    }
-    .attention p {
-      margin: 0;
-    }
-    .attention p:before {
-      content: "*";
-    }
-    .twitter {
-      font-size: 14px;
-    }
-    .twitter a {
-      text-decoration: none;
-      color: #1da1f2;
-    }
-    .link {
-      font-size:14px;
-    }
-    @media (max-width: 1024px) {
-      h1 {
-        font-size: 20px;
-      }
-      .section {
-        font-size: 20px;
-      }
-      .section::before {
-        margin-right: 8px;
-        font-size: 16px;
-      }
-      .radio-group {
-        font-size: 14px;
-      }
-      .radio-group label {
-        display: block;
-      }
-      .multi-group {
-        font-size: 14px;
-        margin: 0 0 12px 24px;
-      }
-      #infoButton {
-        font-size: 16px;
-      }
-      .range-group {
-        margin: 0px 0px 4px 24px;
-      }
-      .range-text {
-        font-size: 14px;
-      }
-      .footer {
-        margin-left: 24px;
-      }
-    }
-    @media (max-width: 599px) {
-      body {
-        margin: 0 8px;
-      }
-      img{
-        max-width: 400px;
-      }
-      #displayButton {
-        padding: 6px 30px;
-      }
-      .table-container {
-        font-size: 10px;
-      }
-      .panel p {
-        font-size: 12px;
-        margin: 0 10px;
-      }
-      .panel table {
-        font-size: 14px;
-      }
-      .modal-content h2 {
-        font-size: 18px;
-      }
-      .modal-content p {
-        font-size: 14px;
-      }
-    }
-    @media (min-width: 600px) and (max-width: 1024px) {
-      body {
-        width: 90%;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    width: 100%;
+}
+
+.form-area p {
+    font-size:20px;
+}
+
+h3::before, .form-area p::before {
+    content: "◢";
+    padding: 8px;
+}
+
+.radio-area, .multi-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.radio-area, .multi-area, .stage-area{
+    padding-left: 16px;
+}
+
+input[type="text"], input[type="range"] {
+    width: 100%;
+    max-width: 80px;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background: var(--secondary-color);
+    color: var(--text-color);
+}
+
+input[type="range"] {
+    width: 100%;
+    max-width: 200px;
+}
+
+.button-area {
+    text-align: center;
+}
+
+#displayButton {
+    background: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#xpTable_wrapper {
+    overflow-x: auto;
+    margin: 0 auto;
+    width: 90%;
+}
+
+#idalTable {
+    margin:0 auto;
+    width: 80%;
+    max-width: 480px;
+}
+
+thead {
+    background: var(--primary-color);
+    color: var(--button-text);
+}
+
+th, .sorting_disabled{
+    text-align: center!important;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    text-align: right;
+}
+
+#xpTable tbody td.dtfc-fixed-left {
+    background: var(--primary-color);
+    color: var(--button-text);
+}
+
+#xpTable tbody tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
+
+.dtfc-fixed-left {
+    background-color: var(--primary-color) !important;
+    z-index: 2 !important;
+}
+
+table.dataTable thead th {
+    background-color: var(--primary-color) !important;
+    z-index: 3 !important;
+}
+  
+.accordion-footer {
+    width: 95%;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    margin: 30px auto; 
+}
+  
+.footer-header {
+    padding: 12px 16px;
+    background: var(--primary-color);
+    color: var(--button-text);
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+  
+.footer-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.accordion-footer.open .footer-content {
+    max-height: 6000px;
+    padding: 12px 16px;
+}
+  
+h3 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+  
+.footer-content p {
+    margin: 0;
+    padding: 0 16px;
+    color: var(--text-color);
+}
+
+img {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 480px;
+}
+  
+
+
+@media (min-width: 768px) {
+    body {
+        width: 80%;
         margin: 0 auto;
-      }
-      img{
-        max-width: 600px;
-      }
-      #displayButton {
-        padding: 8px 40px;
-      }
-      .radio-group {
-        margin: 5px 0 5px 20px;
-        display: flex;
-        gap: 10px;
-      }
-      .table-container {
-        font-size: 12px;
-      }
-      .panel p {
-        font-size: 14px;
-        margin: 0 16px;
-      }
     }
-    @media (min-width: 1025px) {
-      body {
-        max-width: 900px;
-        width: 90%;
-        margin: 0 auto;
-      }
-      img{
-        max-width: 600px;
-      }
-      h1 {
-        font-size: 24px;
-      }
-      #displayButton {
-        padding: 8px 40px;
-      }
-      .form-group {
-        margin: 5px 0;
-      }
-      .section {
-        font-size: 22px;
-      }
-      .section::before {
-        margin-right: 8px;
-        font-size: 18px;
-      }
-      .radio-group {
-        margin-left: 24px;
-        margin-bottom: 5px;
-        display: flex;
-        gap: 10px;
-      }
-      .multi-group, .range-group {
-        margin: 5px 0 5px 28px;
-      }
-      #infoButton {
-        font-size: 18px;
-      }
-      .table-container {
-        font-size: 14px;
-      }
-      .table-container, .accordion, .panel {
-        margin: 0 auto;
-      }
-      .accordion {
-        font-size: 16px;
-      }
-      .panel p {
-        margin: 0 20px;
-      }
-      .footer {
-        margin-left: 30px;
-      }
+
+    .radio-area, .stage-area {
+        flex-direction: row;
+        align-items: center;
     }
+
+    #xpTable_wrapper{
+        width: 100%;
+    }
+
+    th, td {
+        padding: 12px;
+    }
+}
